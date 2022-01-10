@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon1.ico">
+
+<style>
+body {
+  background-color: whitesmoke;
+  padding: 20px;
+  font-family: Arial;
+}
+em {color: DodgerBlue;
+   text-decoration: underline;
+    } 
+em:hover {
+    color: black;
+    }
+b {color: DodgerBlue;
+    font-weight: normal;
+    }     
+
+span {
+  font-style: italic;
+}
+    /* horizontal tab style definition */
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      min-width: 650px;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content - ensures the info segragation across tabs */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      height: 100%;
+      width: 100%;
+      float: left;
+      margin-bottom: 30px;
+      min-width: 650px;
+    }
+
+    /* define row height - to fit images of various diamensions */
+    .tabcontent_row {
+      min-height: 500px;
+     /* max-height: 500px; */
+    }
+    
+    /* Create two equal columns within tabcontent */
+    .tabcontent_column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      /* border: 1px solid #ccc; */
+      /* to show column boarders */
+      /* display: none; Hide columns by default */
+    }
+
+    .tabcontent_column img {
+      max-width: 500px;
+      max-height: 500px; /* fixed height, to keep allignment is case of rectangular images */     
+      object-fit: contain;  /* the image keeps its aspect ratio, but is resized to fit within the given dimension: */
+      display: block;  /* horizontally allign img */
+      margin: auto;    /* horizontally allign img */
+    }
+    .tabcontent_column button {
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+    /* slide show style definition */
+
+    /* Slideshow container */
+    .slideshow-container {
+      width: 100%;
+      position: relative;
+      margin: auto;
+    }    
+
+    /* Next & previous buttons */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;  /* Verticle origentation of slider */
+      padding: 2px; /* Horizontal origentation of slider */
+      color: blue;
+      font-weight: bold;
+      font-size: 30px;
+      transition: 0.6s ease;
+      border-radius: 3px 3px 3px 3px;
+      user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 3px 3px 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .compare-box {
+      width: 100%;
+      overflow: auto;
+    }
+        
+        
+</style>
+</head>
+<title>{{flora_on_webpagej.Botanical_name}}</title>
+<body>
+<div class="container">
+    <h2>WEBSITE TITLE</h2>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"> <a href="/flora">Flora</a></li>
+            <li> <a href="/compare_flora">Compare Flora</a></li>
+            <li> <a href="/search_flora">Search Flora</a></li>
+            <li> <a href="/photo_gallery">Photo Gallery</a> </li>
+            <li> <a href="/openmic">Open Mic</a> </li>
+            <li> <a href="/reference_links">Reference Links</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- <div class="compare-box">     -->
+        <div class="row" style="min-width: 650px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="position:sticky;top:0;background-color:whitesmoke;z-index:50"> <!-- to freeze botanical name -->
+                <h3 style="float: left;padding-left: 10px;">Botanical Name: <b>{{flora_on_webpagej.Botanical_name}}</b></h3>
+            </div> 
+        </div>    
+
+        <div class="tab">
+          <button class="tablinks" onclick="openCity(event, 'Nomenclature')" id="defaultOpen">Nomenclature</button>
+          <button class="tablinks" onclick="openCity(event, 'Root-Stem-Bark')">Root-Stem-Bark</button>
+          <button class="tablinks" onclick="openCity(event, 'Leaf')">Leaf</button>
+          <button class="tablinks" onclick="openCity(event, 'Flower')">Flower</button>
+          <button class="tablinks" onclick="openCity(event, 'Fruit')">Fruit</button>
+          <button class="tablinks" onclick="openCity(event, 'Seed')">Seed</button>
+        </div>
+        
+        <div id="Nomenclature" class="tabcontent">
+          <div class="tabcontent_column">  
+              <h5>Family: <b>{{flora_on_webpagej.Family}}</b></h5>
+              <h5>Common Name: <b>{{flora_on_webpagej.Common_name}}</b></h5>
+              <h5>Etymology - Genus: <b>{{flora_on_webpagej.Etymology_Genus}}</b></h5>
+              <h5>Etymology - Species: <b>{{flora_on_webpagej.Etymology_Species}}</b></h5>
+              <h5>Ecosystem: <b>{{flora_on_webpagej.Ecosystem}}</b></a></h5>
+              <h5>Origin: <b>{{flora_on_webpagej.Origin}}</b></h5>
+              <h5>Location: <b>{{flora_on_webpagej.Location}}</b></h5>          
+              <h5>Description: <b>{{flora_on_webpagej.Description}}</b></h5>
+          </div>
+          
+          <div class="tabcontent_column">
+                <div class="slideshow-container"> 
+                    <!--   start -->
+                    {% set photo_available = namespace(foo=0) %}
+                    {% for photo in flora_on_webpagej.Title_i %}
+                        {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                            {% if os.path.exists(the_var) %}
+                                {% set photo_available.foo = key %}
+                                <div class="mySlides-Nomenclature">
+                                  <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                  <div class="caption">
+                                        <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                        <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                  </div>                                      
+                                </div>
+                            {% endif %}
+                    {% endfor %}                    
+                    <!--   end -->          
+                    {% if photo_available.foo == 0 %}
+                                <div class="mySlides-Nomenclature">
+                                  <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">                              
+                                </div>            
+                    {% endif %}
+                    <!-- Next and previous buttons -->
+                    <button id="prevBtn-Nomenclature" class="prev"  onclick="plusSlidesnew('mySlides-Nomenclature',-1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10094;</button>
+                    <button id="nextBtn-Nomenclature" class="next"  onclick="plusSlidesnew('mySlides-Nomenclature',1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10095;</button>
+                </div>    
+          </div>
+        </div>
+        
+        <div id="Root-Stem-Bark" class="tabcontent">
+          <div class="tabcontent_column">
+              <h5>Root type: <b>{{flora_on_webpagej.Root_type}}</b></h5>
+              <h5>Stem Appearance: <b>{{flora_on_webpagej.Stem_Appearance}}</b></h5>
+              <h5>Stem Cross Section: <b>{{flora_on_webpagej.Stem_Cross_Section}}</b></h5>
+              <h5>Stem Texture: <b>{{flora_on_webpagej.Stem_Texture}}</b></h5>
+              <h5>Root-Stem-Bark Description: <b>{{flora_on_webpagej.Root_Stem_Bark_Description}}</b></h5>
+          </div>
+          <div class="tabcontent_column">
+                <div class="slideshow-container"> 
+                    <!--   start -->
+                    {% set photo_available = namespace(foo=0) %}
+                    {% for photo in flora_on_webpagej.Bark_i %}
+                        {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                            {% if os.path.exists(the_var) %}
+                                {% set photo_available.foo = key %}
+                                <div class="mySlides-Root-Stem-Bark">
+                                  <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                  <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                  </div>                                      
+                                </div>
+                            {% endif %}
+                    {% endfor %}                    
+                    <!--   end -->   
+                    {% if photo_available.foo == 0 %}
+                                <div class="mySlides-Root-Stem-Bark">
+                                  <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                </div>            
+                    {% endif %}
+                    <!-- Next and previous buttons -->
+                    <button id="prevBtn-Root-Stem-Bark" class="prev"  onclick="plusSlidesnew('mySlides-Root-Stem-Bark',-1, 'prevBtn-Root-Stem-Bark','nextBtn-Root-Stem-Bark')">&#10094;</button>
+                    <button id="nextBtn-Root-Stem-Bark" class="next"  onclick="plusSlidesnew('mySlides-Root-Stem-Bark',1, 'prevBtn-Root-Stem-Bark','nextBtn-Root-Stem-Bark')">&#10095;</button>
+                </div>    
+          </div> 
+        </div>
+        
+        <div id="Leaf" class="tabcontent">
+            <div class="tabcontent_column">
+              <h3>Leaf - Characters</h3>
+              <h5>Attachment: <span id="{{flora_on_webpagej.Leaf_Attachment}}" title=" "><em>{{flora_on_webpagej.Leaf_Attachment}}</em></span></h5>
+              <h5>Stipules: <span id="{{flora_on_webpagej.Leaf_Stipules}}" title=" "><em>{{flora_on_webpagej.Leaf_Stipules}}</em></span></h5>
+              <h5>Leaf Type: <span id="{{flora_on_webpagej.Leaf_Type}}" title=" "><em>{{flora_on_webpagej.Leaf_Type}}</em></span></h5>
+              <h5>Phyllotaxy: <span id="{{flora_on_webpagej.Phyllotaxy}}" title=" "><em>{{flora_on_webpagej.Phyllotaxy}}</em></span></h5>
+              <h5>Leaf Description: <b>{{flora_on_webpagej.LeafType_Description}}</b></h5>      
+              </br>      
+              <h3>Leaflet - Characters</h3>
+              <h5>Lamina: <span id="{{flora_on_webpagej.Leaf_Lamina}}" title=" "><em>{{flora_on_webpagej.Leaf_Lamina}}</em></span></h5>
+              <h5>Lamina Bases: <span id="{{flora_on_webpagej.Leaf_Lamina_Bases}}" title=" "><em>{{flora_on_webpagej.Leaf_Lamina_Bases}}</em></span></h5>
+              <h5>Lamina Margins: <span id="{{flora_on_webpagej.Leaf_Lamina_Margins}}" title=" "><em>{{flora_on_webpagej.Leaf_Lamina_Margins}}</em></span></h5>
+              <h5>Lamina Apices: <span id="{{flora_on_webpagej.Leaf_Lamina_Apices}}" title=" "><em>{{flora_on_webpagej.Leaf_Lamina_Apices}}</em></span></h5>
+              <h5>Lamina Texture: <span id="{{flora_on_webpagej.Leaf_Lamina_Texture}}" title=" "><em>{{flora_on_webpagej.Leaf_Lamina_Texture}}</em></span></h5>
+              <h5>Venation: <span id="{{flora_on_webpagej.Leaf_Venation}}" title=" "><em>{{flora_on_webpagej.Leaf_Venation}}</em></span></h5>
+              <h5>Leaflet Description: <b>{{flora_on_webpagej.Leaf_Description}}</b></h5>
+            </div>
+            <div class="tabcontent_column">
+                    <div class="slideshow-container"> 
+                        <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Leaf_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Leaf">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Leaf">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Leaf" class="prev"  onclick="plusSlidesnew('mySlides-Leaf',-1, 'prevBtn-Leaf','nextBtn-Leaf')">&#10094;</button>
+                        <button id="nextBtn-Leaf" class="next"  onclick="plusSlidesnew('mySlides-Leaf',1, 'prevBtn-Leaf','nextBtn-Leaf')">&#10095;</button>
+                    </div>    
+            </div>
+        </div>
+        
+        
+        <div id="Flower" class="tabcontent">
+            <div class="tabcontent_row">
+                <div class="tabcontent_column">
+                  <h3>Inflorescence - Characters</h3>
+                  <h5>Inflorescence: <span id="{{flora_on_webpagej.Inflorescence}}" title=" "><em>{{flora_on_webpagej.Inflorescence}}</em></span></h5>
+                  <h5>Bract: <span id="{{flora_on_webpagej.Bract}}" title=" "><em>{{flora_on_webpagej.Bract}}</em></span></h5>
+                  <h5>Inflorescence Description: <b>{{flora_on_webpagej.Inflorescence_Description}}</b></h5> 
+                </div>
+                <div class="tabcontent_column">
+                    <div class="slideshow-container"> 
+                        <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Inflorescence_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Inflorescence">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Inflorescence">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Inflorescence" class="prev"  onclick="plusSlidesnew('mySlides-Inflorescence',-1, 'prevBtn-Inflorescence','nextBtn-Inflorescence')">&#10094;</button>
+                        <button id="nextBtn-Inflorescence" class="next"  onclick="plusSlidesnew('mySlides-Inflorescence',1, 'prevBtn-Inflorescence','nextBtn-Inflorescence')">&#10095;</button>
+                    </div>
+                </div>
+            </div>  
+            </br>
+            <div class="tabcontent_row">
+                <div class="tabcontent_column">
+                  <h3>Flower - Characters</h3>
+                  <h5>Flower Type: <span id="{{flora_on_webpagej.Flower_Type}}" title=" "><em>{{flora_on_webpagej.Flower_Type}}</em></span></h5>
+                  <h5>Flower Symmetry: <span id="{{flora_on_webpagej.Flower_Symmetry}}" title=" "><em>{{flora_on_webpagej.Flower_Symmetry}}</em></span></h5>
+                  <h5>Thalamus Types: <span id="{{flora_on_webpagej.Flower_Thalamus_Types}}" title=" "><em>{{flora_on_webpagej.Flower_Thalamus_Types}}</em></span></h5>
+                  <h5>Position of Whorls: <span id="{{flora_on_webpagej.Flower_Position_of_Whorls}}" title=" "><em>{{flora_on_webpagej.Flower_Position_of_Whorls}}</em></span></h5>
+                  <h5>Aestivation: <span id="{{flora_on_webpagej.Flower_Aestivation}}" title=" "><em>{{flora_on_webpagej.Flower_Aestivation}}</em></span></h5>
+                  <h5>Flower Description: <b>{{flora_on_webpagej.Flower_Description}}</b></h5> 
+                </div>
+                <div class="tabcontent_column">
+                    <div class="slideshow-container"> 
+                        <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Flower_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Flower">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Flower">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Flower" class="prev"  onclick="plusSlidesnew('mySlides-Flower',-1, 'prevBtn-Flower','nextBtn-Flower')">&#10094;</button>
+                        <button id="nextBtn-Flower" class="next"  onclick="plusSlidesnew('mySlides-Flower',1, 'prevBtn-Flower','nextBtn-Flower')">&#10095;</button>
+                    </div>   
+                </div>
+            </div>
+            </br>
+            <div class="tabcontent_row">
+                <div class="tabcontent_column">
+                  <h3>Floral Parts - Characters</h3>
+                  <h5>Calyx Arrangement: <span href="#" id="{{flora_on_webpagej.Calyx_Arrangement}}" title=" "><em>{{flora_on_webpagej.Calyx_Arrangement}}</em></span></h5>
+                  <h5>Calyx Persistance: <span href="#" id="{{flora_on_webpagej.Calyx_Persistance}}" title=" "><em>{{flora_on_webpagej.Calyx_Persistance}}</em></span></h5>
+                  <h5>Calyx Number of sepals: <b>{{flora_on_webpagej.Calyx_Number_of_sepals}}</b></h5> 
+                  </br>
+                  <h5>Corolla Arrangement: <span id="{{flora_on_webpagej.Corolla_Arrangement}}" title=" "><em>{{flora_on_webpagej.Corolla_Arrangement}}</em></span></h5>
+                  <h5>Corolla Appendages: <span id="{{flora_on_webpagej.Corolla_Appendages}}" title=" "><em>{{flora_on_webpagej.Corolla_Appendages}}</em></span></h5>
+                  <h5>Corolla Number of petals: <b>{{flora_on_webpagej.Corolla_Number_of_petals}}</b></h5>
+                  </br>
+                  <h5>Perianth Arrangement: <span id="{{flora_on_webpagej.Perianth_Arrangement}}" title=" "><em>{{flora_on_webpagej.Perianth_Arrangement}}</em></span></h5>
+                  <h5>Perianth Number of tepals: <b>{{flora_on_webpagej.Perianth_Number_of_tepals}}</b></h5>
+                  </br>
+                  <h5>Androecium Attachment of anther: <span id="{{flora_on_webpagej.Androecium_Attachment_of_anther}}" title=" "><em>{{flora_on_webpagej.Androecium_Attachment_of_anther}}</em></span></h5>
+                  <h5>Androecium Length of filament: <span id="{{flora_on_webpagej.Androecium_Length_of_filament}}" title=" "><em>{{flora_on_webpagej.Androecium_Length_of_filament}}</em></span></h5>
+                  <h5>Androecium Union of Stamens: <span id="{{flora_on_webpagej.Androecium_Union_of_Stamens}}" title=" "><em>{{flora_on_webpagej.Androecium_Union_of_Stamens}}</em></span></h5>
+                  <h5>Androecium Number of Stamens: <b>{{flora_on_webpagej.Androecium_Number_of_Stamens}}</b></h5>
+                  </br>
+                  <h5>Gynoecium Placentation: <span id="{{flora_on_webpagej.Gynoecium_Placentation}}" title=" "><em>{{flora_on_webpagej.Gynoecium_Placentation}}</em></span></h5>
+                  <h5>Gynoecium Union of Carpels: <span href="#" id="{{flora_on_webpagej.Gynoecium_Union_of_Carpels}}" title=" "><em>{{flora_on_webpagej.Gynoecium_Union_of_Carpels}}</em></span></h5>
+                  <h5>Gynoecium Number of Carpels: <b>{{flora_on_webpagej.Gynoecium_Number_of_Carpels}}</b></h5>
+                  </br>
+                  <h5>Floral Parts Description: <b>{{flora_on_webpagej.Floral_Parts_Description}}</b></h5>   
+                </div>
+                <div class="tabcontent_column">      
+                    <div class="slideshow-container"> 
+                        <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Floralparts_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Floralparts">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Floralparts">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Floralparts" class="prev"  onclick="plusSlidesnew('mySlides-Floralparts',-1, 'prevBtn-Floralparts','nextBtn-Floralparts')">&#10094;</button>
+                        <button id="nextBtn-Floralparts" class="next"  onclick="plusSlidesnew('mySlides-Floralparts',1, 'prevBtn-Floralparts','nextBtn-Floralparts')">&#10095;</button>
+                    </div>        
+                </div>
+            </div>
+        </div>
+        
+        <div id="Fruit" class="tabcontent">
+            <div class="tabcontent_row">
+                <div class="tabcontent_column">
+                    <h5>Fruit type: <span id="{{flora_on_webpagej.Fruit_type}}" title=" "><em>{{flora_on_webpagej.Fruit_type}}</em></span></h5>
+                    <h5>Fruit type Description: <b>{{flora_on_webpagej.Fruittype_Description}}</b></h5> 
+                </div>
+                <div class="tabcontent_column">     
+                    <div class="slideshow-container"> 
+                    <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Fruit_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Fruit">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Fruit">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Fruit" class="prev"  onclick="plusSlidesnew('mySlides-Fruit',-1, 'prevBtn-Fruit','nextBtn-Fruit')">&#10094;</button>
+                        <button id="nextBtn-Fruit" class="next"  onclick="plusSlidesnew('mySlides-Fruit',1, 'prevBtn-Fruit','nextBtn-Fruit')">&#10095;</button>
+                    </div>
+                </div>
+            </div>                 
+        </div>
+        
+        <div id="Seed" class="tabcontent">
+            <div class="tabcontent_row">
+                <div class="tabcontent_column">
+                    <h5>Seed Type: <span id="{{flora_on_webpagej.Type}}" title=" "><em>{{flora_on_webpagej.Type}}</em></span></h5>
+                    <h5>Germination type: <span id="{{flora_on_webpagej.Germination_type}}" title=" "><em>{{flora_on_webpagej.Germination_type}}</em></span></h5>
+                    <h5>Dispersion Method: <b>{{flora_on_webpagej.Dispersion_Method}}</b></h5>
+                    <h5>Preprocessing for germination: <b>{{flora_on_webpagej.Preprocessing_for_germination}}</b></h5>
+                    <h5>Germination time: <b>{{flora_on_webpagej.Germination_time}}</b></h5>
+                    <h5>Seed shelf life: <b>{{flora_on_webpagej.Seed_shelf_life}}</b></h5>    
+                    <h5>Germination %: <b>{{ flora_on_webpagej['Germination_%'] }}</b></h5>
+                    <h5>Seed Description: <b>{{flora_on_webpagej.Seed_Description}}</b></h5>
+                </div>
+                <div class="tabcontent_column">
+                    <div class="slideshow-container"> 
+                    <!--   start -->
+                        {% set photo_available = namespace(foo=0) %}
+                        {% for photo in flora_on_webpagej.Seed_i %}
+                            {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                                {% if os.path.exists(the_var) %}
+                                    {% set photo_available.foo = key %}
+                                    <div class="mySlides-Seed">
+                                      <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                      <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                      </div>                                      
+                                    </div>
+                                {% endif %}
+                        {% endfor %}                    
+                        <!--   end -->   
+                        {% if photo_available.foo == 0 %}
+                                    <div class="mySlides-Seed">
+                                      <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">
+                                    </div>            
+                        {% endif %}
+                        <!-- Next and previous buttons -->
+                        <button id="prevBtn-Seed" class="prev"  onclick="plusSlidesnew('mySlides-Seed',-1, 'prevBtn-Seed','nextBtn-Seed')">&#10094;</button>
+                        <button id="nextBtn-Seed" class="next"  onclick="plusSlidesnew('mySlides-Seed',1, 'prevBtn-Seed','nextBtn-Seed')">&#10095;</button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    <!-- </div>  /.compare-box -->
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- hide/show  horizontal tabs -->
+<script>
+function openCity(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+<!-- photo slide show -->
+<!-- ref for multiple slideshow windows - https://stackoverflow.com/questions/47098759/html-page-to-display-multiple-slideshows -->
+<!-- investigate issue with "slideIndex" - additional mouse click required on next prev buttons -->
+<script>
+
+// prev next slider disable - https://stackoverflow.com/questions/54523288/disable-prev-next-arrows-on-first-and-last-slides?rq=1
+var slideIndexnew = 1;
+showSlidesnew('mySlides-Nomenclature',1, 'prevBtn-Nomenclature','nextBtn-Nomenclature');
+showSlidesnew('mySlides-Root-Stem-Bark',1, 'prevBtn-Root-Stem-Bark','nextBtn-Root-Stem-Bark');
+showSlidesnew('mySlides-Leaf',1, 'prevBtn-Leaf','nextBtn-Leaf');
+showSlidesnew('mySlides-Inflorescence',1, 'prevBtn-Inflorescence','nextBtn-Inflorescence');
+showSlidesnew('mySlides-Flower',1, 'prevBtn-Flower','nextBtn-Flower');
+showSlidesnew('mySlides-Floralparts', 1,'prevBtn-Floralparts','nextBtn-Floralparts');
+showSlidesnew('mySlides-Fruit', 1,'prevBtn-Fruit','nextBtn-Fruit');
+showSlidesnew('mySlides-Seed', 1,'prevBtn-Seed','nextBtn-Seed');
+
+function plusSlidesnew(classname, n, prevclass, nextclass) {
+  // console.log(n); 
+  var slides = document.getElementsByClassName(classname); // code to get current slideIndexnew of a class
+  for (i = 0; i < slides.length; i++) {
+      if (slides[i].style.display == "block"){
+          slideIndexnew = i+1;
+      }
+  }
+  showSlidesnew(classname, slideIndexnew += n, prevclass, nextclass);
+}
+
+function showSlidesnew(classname, n, prevclass, nextclass) {
+  var i;
+  var slides = document.getElementsByClassName(classname);
+  var prevBtn = document.getElementById(prevclass);
+  var nextBtn = document.getElementById(nextclass);  
+  // console.log(slideIndexnew); // count ref of prev/next image to be dispalyed
+  // console.log(slides.length);
+  // if (n > slides.length) {slideIndexnew = 1}    
+  // if (n < 1) {slideIndexnew = slides.length}
+  if (slides.length > 0){ // condition to ensure .style.display is assigned only when there is an image available
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  // Element will not be displayed
+      }
+      slides[slideIndexnew-1].style.display = "block"; // Element will be displayed
+  }
+  
+   if (slides.length <= 1) { // disable prev/next buttons if there is no image or only 1 image
+      prevBtn.hidden = true;
+      nextBtn.hidden = true;  
+   } else { // prev/next disable logic required if there are more than 1 image
+        prevBtn.hidden = false;
+        nextBtn.hidden = false; 
+        if (n == slides.length) {
+          // nextBtn.disabled = true;
+          nextBtn.hidden = true;
+        } else if (n == 1) {
+          // prevBtn.disabled = true;
+          prevBtn.hidden = true;
+        }
+   } 
+}
+
+</script>
+
+<!-- rendering text on tooltip for em tag -->
+<script>  
+$(document).ready(function(){ 
+    $('span').tooltip({
+        classes:{
+            "ui-tooltip":"highlight"
+        },
+        position:{ my:'left center', at:'right+50 center'},
+        content:function(result){
+            $.post('/fetchdata', {
+                id:$(this).attr('id')
+            }, function(data){
+                result(data.htmlresponse);
+                 
+            });
+        }
+    });
+});  
+</script>
+
+
+</body>
+</html>
+
+

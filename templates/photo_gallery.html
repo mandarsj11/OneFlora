@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon1.ico">
+<style>
+body {
+  background-color: whitesmoke;
+  padding: 20px;
+  font-family: Arial;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+h4 {
+text-align: center;
+}
+p {
+text-align: center;
+}
+
+/* Style for Portfolio Gallery  */
+.row {
+  margin: 16px -16px; /* space between tab and images */
+}
+
+/* Add padding BETWEEN each column (if you want) */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+.thumbnail .caption {
+    height: 100px; /* Need better solution to resize image caption */
+    /*border: 1px solid #ccc; */ /* to show column boarders */
+}
+
+</style>
+</head>
+<title>WEBSITE TITLE</title>
+<body>
+<div class="container">
+    <h2>WEBSITE TITLE</h2>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                    <!-- <a class="navbar-brand" href="#">Search Flora</a> -->
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/flora">Flora</a></li>
+            <li> <a href="/compare_flora">Compare Flora</a></li>
+            <li> <a href="/search_flora">Search Flora</a></li>
+            <li class="active"> <a href="/photo_gallery">Photo Gallery</a> </li>
+            <li> <a href="/openmic">Open Mic</a> </li>
+            <li> <a href="/reference_links">Reference Links</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>    
+    <!-- Portfolio Gallery Grid -->
+    <div class="row">
+    {% if not photo_gallery.empty %}
+            {% for key, bot_row in photo_gallery.iterrows()%}
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+              <div class="thumbnail">
+                  <a href="/static/Compare/{{bot_row['photo']}}.JPG">
+                    <img src="/static/Compare/{{bot_row['photo']}}.JPG" alt="{{bot_row['Genus']}}" style="width:100%;object-fit: contain;">
+                    <div class="caption">
+                        <p style="font-size:100%;">{{bot_row['Genus']}}</p>
+                        <p style="font-size:80%%;">{{bot_row['Family']}}</p>
+                    </div>
+                  </a>                
+              </div>
+            </div>
+            {% endfor %}
+    {% else %}
+        No results :(
+    {% endif %}
+    
+    <!-- END GRID -->
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-6">
+              <div class="thumbnail">
+              <a href="/static/Compare/Caesalpiniaceae - Bauhinia spp.JPG">
+                  <img src="/static/Compare/Caesalpiniaceae - Bauhinia spp.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Bauhinia spp - Distinctive Morphological characters</p>
+                      <p style="font-size:80%;">Caesalpiniaceae</p>
+                  </div>
+              </a>
+              </div>                  
+        </div>
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Caesalpinaceae - Brownea coccinea - Presentation.JPG">
+                  <img src="/static/Compare/Caesalpinaceae - Brownea coccinea - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Brownea coccinea</p>
+                      <p style="font-size:80%;">Caesalpiniaceae</p>
+                  </div>
+              </a>
+              </div>           
+              <div class="thumbnail">
+              <a href="/static/Compare/Caesalpinaceae - Colvillea racemosa - Presentation.JPG">
+                  <img src="/static/Compare/Caesalpinaceae - Colvillea racemosa - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Colvillea racemosa</p>
+                      <p style="font-size:80%;">Caesalpiniaceae</p>
+                  </div>
+              </a>
+              </div>                         
+        </div>    
+        <div class="col-lg-2">
+              <div class="thumbnail">          
+              <a href="/static/Compare/Combretaceae - Anogeissus acuminata - Presentation.JPG">
+                  <img src="/static/Compare/Combretaceae - Anogeissus acuminata - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Anogeissus acuminata</p>
+                      <p style="font-size:80%;">Combretaceae</p>
+                  </div>
+              </a>
+              </div>            
+              <div class="thumbnail">          
+              <a href="/static/Compare/Euphorbiaceae - Putranjiva roxburghii - Presentation.JPG">
+                  <img src="/static/Compare/Euphorbiaceae - Putranjiva roxburghii - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Putranjiva roxburghii</p>
+                      <p style="font-size:80%;">Euphorbiaceae</p>
+                  </div>
+              </a>
+              </div>                  
+        </div>
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Fabaceae - Vigna unguiculata - Presentation.JPG">
+                  <img src="/static/Compare/Fabaceae - Vigna unguiculata - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Vigna unguiculata</p>
+                      <p style="font-size:80%;">Fabaceae</p>
+                  </div>
+              </a>
+              </div>           
+              <div class="thumbnail">          
+              <a href="/static/Compare/Lamiaceae - Pogostemon benghalensis - Presentation.JPG">
+                  <img src="/static/Compare/Lamiaceae - Pogostemon benghalensis - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Pogostemon benghalensis</p>
+                      <p style="font-size:80%;">Lamiaceae</p>
+                  </div>
+              </a>
+              </div>                         
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+              <div class="thumbnail">
+              <a href="/static/Compare/Sapotaceae - Madhuca spp.JPG">
+                  <img src="/static/Compare/Sapotaceae - Madhuca spp.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Madhuca spp - Distinctive Morphological characters</p>
+                      <p style="font-size:80%;">Sapotaceae</p>
+                  </div>
+              </a>
+              </div>         
+        </div>
+        <div class="col-lg-6">
+              <div class="thumbnail">
+              <a href="/static/Compare/Germination Experiment – Entada rheeidi.JPG">
+                  <img src="/static/Compare/Germination Experiment – Entada rheeidi.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Germination Experiment – Entada rheeidi</p>
+                      <p style="font-size:80%;">Mimosaceae</p>
+                  </div>
+              </a>
+              </div>         
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Lythraceae - Lagerstroemia speciosa - Presentation.JPG">
+                  <img src="/static/Compare/Lythraceae - Lagerstroemia speciosa - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Lagerstroemia speciosa</p>
+                      <p style="font-size:80%;">Lythraceae</p>
+                  </div>
+              </a>
+              </div>           
+              <div class="thumbnail">
+              <a href="/static/Compare/Malvaceae - Adansonia digitata - Presentation.JPG">
+                  <img src="/static/Compare/Malvaceae - Adansonia digitata - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Adansonia digitata</p>
+                      <p style="font-size:80%;">Malvaceae</p>
+                  </div>
+              </a>
+              </div>                         
+        </div>        
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Mimosaceae - Prosopis cineraria - Presentation.JPG">
+                  <img src="/static/Compare/Mimosaceae - Prosopis cineraria - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Prosopis cineraria</p>
+                      <p style="font-size:80%;">Mimosaceae</p>
+                  </div>
+              </a>
+              </div>           
+              <div class="thumbnail">
+              <a href="/static/Compare/Ochnaceae - Ochna obtusata - Presentation.JPG">
+                  <img src="/static/Compare/Ochnaceae - Ochna obtusata - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Ochna obtusata</p>
+                      <p style="font-size:80%;">Ochnaceae</p>
+                  </div>
+              </a>
+              </div>                         
+        </div> 
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Acanthaceae - Thunbergia coccinea - Presentation.JPG">
+                  <img src="/static/Compare/Acanthaceae - Thunbergia coccinea - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Thunbergia coccinea</p>
+                      <p style="font-size:80%;">Acanthaceae</p>
+                  </div>
+              </a>
+              </div>           
+              <div class="thumbnail">
+              <a href="/static/Compare/Bigniniaceae - Dolichandra unguis-cati - Presentation.JPG">
+                  <img src="/static/Compare/Bigniniaceae - Dolichandra unguis-cati - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Dolichandra unguis-cati</p>
+                      <p style="font-size:80%;">Bigniniaceae</p>
+                  </div>
+              </a>
+              </div>                         
+        </div> 
+        <div class="col-lg-2">
+              <div class="thumbnail">
+              <a href="/static/Compare/Caesalpinaceae - Bauhinia variegata - Presentation.JPG">
+                  <img src="/static/Compare/Caesalpinaceae - Bauhinia variegata - Presentation.JPG" style="width:100%;object-fit: contain;">
+                  <div class="caption">
+                      <p style="font-size:100%;">Bauhinia variegata</p>
+                      <p style="font-size:80%;">Caesalpinaceae</p>
+                  </div>
+              </a>
+              </div>                      
+        </div>     
+    </div>
+</div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html> 

@@ -1,0 +1,108 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 20px;
+    overflow-y: scroll; /* Show vertical scrollbar */
+    overflow-x: auto; /* Auto polutate horizontal scrollbar */
+    
+}
+/*::-webkit-scrollbar {  This fixed the tab allignment issue: https://www.digitalocean.com/community/tutorials/css-scrollbars 
+    width: 0;
+    height: 0;  This caused verticle scrllbar to disappear, hence commented. insted overflow set in body section */
+} 
+
+@media (max-width: 991px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left, .navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in {
+        display: block !important;
+    }
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+}
+
+@media (max-width: 767px) {
+    .thumbnail a>img, .thumbnail>img {
+        border-radius: 4px;
+        width: 100%;
+        height: 100px;
+        object-fit: contain;
+    }
+}
+
+.navbar { /* stickly navbar */
+	background-color: #ffffff; /* white */
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.tab { /* stickly navbar */
+	position: sticky;
+	top: 0;
+	z-index: 20;
+}
+
+.thumbnail a>img, .thumbnail>img {
+    border-radius: 4px;
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    min-height: 155px;
+}
+
+.thumbnail .caption {
+    padding: 5px;
+}
+
+.thumbnail:hover {
+    box-shadow: 0px 0px 20px 5px #80808073;
+    transition: 0.3s;
+}
+
+.thumbnail .caption p {
+    font-size: 12px;
+    margin-bottom: 5px;
+    /* text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; */
+}
+
+/* .thumbnail .caption p:first-child {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  } */
