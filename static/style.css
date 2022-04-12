@@ -2,13 +2,12 @@ body {
     font-family: 'Poppins', sans-serif;
     padding-top: 20px;
     overflow-y: scroll; /* Show vertical scrollbar */
-    overflow-x: auto; /* Auto polutate horizontal scrollbar */
-    
+    overflow-x: auto; /* Auto polutate horizontal scrollbar */ 
 }
 /*::-webkit-scrollbar {  This fixed the tab allignment issue: https://www.digitalocean.com/community/tutorials/css-scrollbars 
     width: 0;
-    height: 0;  This caused verticle scrllbar to disappear, hence commented. insted overflow set in body section */
-} 
+    height: 0;  This caused verticle scrllbar to disappear, hence commented. insted overflow set in body section 
+} */
 
 @media (max-width: 991px) {
     .navbar-header {
@@ -98,7 +97,6 @@ body {
     white-space: nowrap;
     overflow: hidden; */
 }
-
 /* .thumbnail .caption p:first-child {
     font-size: 14px;
     margin-bottom: 5px;

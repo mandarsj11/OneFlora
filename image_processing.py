@@ -1,3 +1,4 @@
+from contextlib2 import nullcontext
 import pandas as pd
 import os
 import sys
@@ -57,7 +58,13 @@ for file in os.listdir(setwd):
                      rpicture=picture.transpose(Image.ROTATE_270).transpose(Image.FLIP_TOP_BOTTOM)
                 elif image_orientation in (8,'8'):
                      picture=picture.transpose(Image.ROTATE_90)        
+                try:
                 datetime = pd.to_datetime(exif[36867], format='%Y:%m:%d %H:%M:%S')
+                    print("The date and time when the original image data was generated: ",file)
+                except KeyError:
+                    datetime = pd.to_datetime(exif[306], format='%Y:%m:%d %H:%M:%S')
+                    print("The date and time the file was changed: ",file)
+
                 #---------------------
                 picture.thumbnail((1000, 1000), Image.ANTIALIAS)
                 draw_caption = ImageDraw.Draw(picture)
@@ -91,6 +98,10 @@ for file in os.listdir(setwd):
                                         'Caption':''
                                         },ignore_index=True)
            
+writer = pd.ExcelWriter('output.xlsx', engine='xlsxwriter',datetime_format='dd-mmm-yyyy hh:mm AM/PM')
+Image_Library.to_excel(writer)
+writer.save()
+print('DataFrame is written successfully to Excel File.')
 # --- getting list of all files in a directory
 """
 from os import listdir

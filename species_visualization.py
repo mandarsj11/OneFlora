@@ -46,13 +46,13 @@ def search(botanical_name):
           
     return render_template("SelectSpecies_horizontal.html", flora_on_webpagej = json_flora[0], os=os)
 
-@app.route('/compare_flora', methods = ['GET'])
+@app.route('/compare_flora', methods = ['GET', 'POST'])
 def compare():
     flora_to_display1 = pd.DataFrame()
     json_flora_comp = []
-    if request.args.get('botanical_name1', None) is not None: 
-        name1 = request.args.get('botanical_name1', None) 
-        name2 = request.args.get('botanical_name2', None) 
+    if request.values.get('botanical_name1', None) is not None: #request.values.get - works for both GET & POST
+        name1 = request.values.get('botanical_name1', None) 
+        name2 = request.values.get('botanical_name2', None) 
         print(name1, name2)
         flora_to_display1 = Flora_data.loc[Flora_data['Botanical_name'] == name1]
         flora_to_display2 = Flora_data.loc[Flora_data['Botanical_name'] == name2]
@@ -72,14 +72,14 @@ def compare():
 
     return render_template("compare_flora_horizontal.html", flora_on_webpagej = json_flora_comp, os=os)
 
-@app.route('/search_flora', methods = ['GET'])
+@app.route('/search_flora', methods = ['GET','POST'])
 def search_flora():
     json_flora_search = []
     to_search = None
     print('Search Value', request.values)
     #if request.method == 'GET' and request:
-    if request.args.get('search_word', None) is not None:# will return the value of 'search_word' in the dict if its set, otherwise it returns None
-        to_search = request.args.get('search_word', None)
+    if request.values.get('search_word', None) is not None:# will return the value of 'search_word' in the dict if its set, otherwise it returns None
+        to_search = request.values.get('search_word', None)
         mask = Flora_data.apply(lambda row: row.astype(str).str.contains(r'{}'.format(to_search), case=False).any(), axis=1)
         flora_to_display = Flora_data[np.array(mask,dtype=bool)]
         
@@ -100,28 +100,32 @@ def search_flora():
             count = count +1
     
     return render_template("search_flora.html", search_species_j = json_flora_search, os=os, search_word=to_search)
+
+""" static compare photos to be used in "why this website article"
 @app.route("/photo_gallery", methods=['GET', 'POST'])
 def gallery():
     
     return render_template("photo_gallery.html", photo_gallery = photo_gallery)
+"""
 
 @app.route('/openmic', methods = ['GET','POST'])
 def openmic():
 
     return render_template("open_mic.html")
 
+""" reference links are covered in OpenMic
 @app.route('/reference_links', methods = ['GET','POST'])
 def about():
 
     return render_template("reference_links.html")
-
+"""
 @app.route("/fetchdata",methods=["POST","GET"])
 def fetchdata():
     meaning = pd.DataFrame()
     photo = pd.DataFrame()
     if request.method == 'POST':
         id = request.form['id']
-        print(id)
+        #print(id)
         rs = Dictionary.loc[Dictionary['BOTANICAL TERMS'] == id] 
         if not rs.empty:
             meaning = rs['Meaning'].iat[0]
@@ -132,7 +136,7 @@ def fetchdata():
         else:
             meaning = 'Add term to the Directory'
             photo = 'Default_sketch'
-        print(meaning)
+        #print(meaning)
         return jsonify({'htmlresponse': render_template('response.html', meaning=meaning, photo=photo)})
     else:
         return jsonify({'htmlresponse': render_template('response.html', meaning=meaning, photo=photo)})
@@ -144,6 +148,12 @@ def searchlist():
                
 if __name__ == "__main__": #if this script is run directly then start the application
     app.run()
+
+"""
+Steps to run flask from Terminal
+> $env:FLASK_APP = "name_of_.py_to_run"
+> flask run
+"""
 
 #compare website codes - to try
 #https://codyhouse.co/gem/products-comparison-table
@@ -171,8 +181,3 @@ if __name__ == "__main__": #if this script is run directly then start the applic
 
 #Variable assignment in Jinja	
 #https://stackoverflow.com/questions/9486393/jinja2-change-the-value-of-a-variable-inside-a-loop
-
-
-
-
-

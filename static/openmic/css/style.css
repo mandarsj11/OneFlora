@@ -209,10 +209,11 @@ button.btn:hover {
     width: 100%;
 }
 
+/* No nned to blur the image
 .top-news .tn-img:hover img {
     filter: blur(3px);
     -webkit-filter: blur(3px);
-}
+}*/
 
 .top-news .tn-title {
     position: absolute;
@@ -330,10 +331,11 @@ button.btn:hover {
     width: 100%;
 }
 
+/* No nned to blur the image
 .cat-news .cn-img:hover img {
     filter: blur(3px);
     -webkit-filter: blur(3px);
-}
+} */
 
 .cat-news .cn-title {
     position: absolute;
@@ -487,10 +489,11 @@ button.btn:hover {
     width: 100%;
 }
 
+/* No nned to blur the image
 .main-news .mn-img:hover img {
     filter: blur(3px);
     -webkit-filter: blur(3px);
-}
+} */
 
 .main-news .mn-title {
     position: absolute;

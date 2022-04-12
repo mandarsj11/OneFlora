@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon1.ico">
+  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon.ico">
 <style>
 body {
   background-color: whitesmoke;
@@ -42,10 +42,17 @@ text-align: center;
 
 </style>
 </head>
-<title>WEBSITE TITLE</title>
+<title>OneFlora</title>
 <body>
 <div class="container">
-    <h2>WEBSITE TITLE</h2>
+    <div class="bg-light clearfix">
+        <div class="pull-left">
+            <h2>OneFlora</h2>
+        </div>
+        <div class="pull-right">
+            <h3 style="font:Helvetica;">Observe&ensp;&rArr;&ensp;Differentiate&ensp;&rArr;&ensp;Identify&ensp;&rArr;&ensp;NURTURE</h3>
+        </div>
+    </div>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -83,7 +90,7 @@ text-align: center;
                     <img src="/static/Compare/{{bot_row['photo']}}.JPG" alt="{{bot_row['Genus']}}" style="width:100%;object-fit: contain;">
                     <div class="caption">
                         <p style="font-size:100%;">{{bot_row['Genus']}}</p>
-                        <p style="font-size:80%%;">{{bot_row['Family']}}</p>
+                        <p style="font-size:80%;">{{bot_row['Family']}}</p>
                     </div>
                   </a>                
               </div>

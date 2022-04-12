@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="/static/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon1.ico">
+  <link rel="icon" type="image/x-icon" href="/static/flora_title/fevicon.ico">
 
 <style>
 body {
@@ -148,7 +148,14 @@ span {
 <title>{{flora_on_webpagej.Botanical_name}}</title>
 <body>
 <div class="container">
-    <h2>WEBSITE TITLE</h2>
+      <div class="bg-light clearfix">
+        <div class="pull-left">
+            <h2>OneFlora</h2>
+        </div>
+        <div class="pull-right">
+            <h3 style="font:Helvetica;">Observe&ensp;&rArr;&ensp;Differentiate&ensp;&rArr;&ensp;Identify&ensp;&rArr;&ensp;NURTURE</h3>
+        </div>
+    </div>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -168,9 +175,9 @@ span {
             <li class="active"> <a href="/flora">Flora</a></li>
             <li> <a href="/compare_flora">Compare Flora</a></li>
             <li> <a href="/search_flora">Search Flora</a></li>
-            <li> <a href="/photo_gallery">Photo Gallery</a> </li>
+            <!--<li> <a href="/photo_gallery">Photo Gallery</a> </li>-->
             <li> <a href="/openmic">Open Mic</a> </li>
-            <li> <a href="/reference_links">Reference Links</a></li>
+            <!--<li> <a href="/reference_links">Reference Links</a></li>-->
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -192,45 +199,44 @@ span {
         </div>
         
         <div id="Nomenclature" class="tabcontent">
-          <div class="tabcontent_column">  
-              <h5>Family: <b>{{flora_on_webpagej.Family}}</b></h5>
-              <h5>Common Name: <b>{{flora_on_webpagej.Common_name}}</b></h5>
-              <h5>Etymology - Genus: <b>{{flora_on_webpagej.Etymology_Genus}}</b></h5>
-              <h5>Etymology - Species: <b>{{flora_on_webpagej.Etymology_Species}}</b></h5>
-              <h5>Ecosystem: <b>{{flora_on_webpagej.Ecosystem}}</b></a></h5>
-              <h5>Origin: <b>{{flora_on_webpagej.Origin}}</b></h5>
-              <h5>Location: <b>{{flora_on_webpagej.Location}}</b></h5>          
-              <h5>Description: <b>{{flora_on_webpagej.Description}}</b></h5>
-          </div>
-          
-          <div class="tabcontent_column">
-                <div class="slideshow-container"> 
-                    <!--   start -->
-                    {% set photo_available = namespace(foo=0) %}
-                    {% for photo in flora_on_webpagej.Title_i %}
-                        {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
-                            {% if os.path.exists(the_var) %}
-                                {% set photo_available.foo = key %}
-                                <div class="mySlides-Nomenclature">
-                                  <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
-                                  <div class="caption">
-                                        <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
-                                        <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
-                                  </div>                                      
-                                </div>
-                            {% endif %}
-                    {% endfor %}                    
-                    <!--   end -->          
-                    {% if photo_available.foo == 0 %}
-                                <div class="mySlides-Nomenclature">
-                                  <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">                              
-                                </div>            
-                    {% endif %}
-                    <!-- Next and previous buttons -->
-                    <button id="prevBtn-Nomenclature" class="prev"  onclick="plusSlidesnew('mySlides-Nomenclature',-1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10094;</button>
-                    <button id="nextBtn-Nomenclature" class="next"  onclick="plusSlidesnew('mySlides-Nomenclature',1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10095;</button>
-                </div>    
-          </div>
+            <div class="tabcontent_column">  
+                <h5>Family: <b>{{flora_on_webpagej.Family}}</b></h5>
+                <h5>Common Name: <b>{{flora_on_webpagej.Common_name}}</b></h5>
+                <h5>Etymology - Genus: <b>{{flora_on_webpagej.Etymology_Genus}}</b></h5>
+                <h5>Etymology - Species: <b>{{flora_on_webpagej.Etymology_Species}}</b></h5>
+                <h5>Ecosystem: <b>{{flora_on_webpagej.Ecosystem}}</b></a></h5>
+                <h5>Origin: <b>{{flora_on_webpagej.Origin}}</b></h5>
+                <h5>Location: <b>{{flora_on_webpagej.Location}}</b></h5>          
+                <h5>Description: <b>{{flora_on_webpagej.Description}}</b></h5>
+            </div>
+            <div class="tabcontent_column">
+                  <div class="slideshow-container"> 
+                      <!--   start -->
+                      {% set photo_available = namespace(foo=0) %}
+                      {% for photo in flora_on_webpagej.Title_i %}
+                          {% set the_var = '.' + '/static/flora_title/' + photo.File_Name %}
+                              {% if os.path.exists(the_var) %}
+                                  {% set photo_available.foo = key %}
+                                  <div class="mySlides-Nomenclature">
+                                    <img src="/static/flora_title/{{photo.File_Name}}" alt="{{flora_on_webpagej.Botanical_name}}">                           
+                                    <div class="caption">
+                                          <p style="font-size:80%;">Photo Credit: <b>{{photo.Contributor}}</b>&emsp;Record Count: <b>{{photo.Record_count}}</b>&emsp;Photo Date-Time: <b>{{photo.Photo_DateTime}}</b></p>
+                                          <p style="font-size:80%;">Photo Description: <b>{{photo.Caption}}</b></p>
+                                    </div>                                      
+                                  </div>
+                              {% endif %}
+                      {% endfor %}                    
+                      <!--   end -->          
+                      {% if photo_available.foo == 0 %}
+                                  <div class="mySlides-Nomenclature">
+                                    <img src="/static/flora_title/Default_photo.JPG" alt="Default_photo">                              
+                                  </div>            
+                      {% endif %}
+                      <!-- Next and previous buttons -->
+                      <button id="prevBtn-Nomenclature" class="prev"  onclick="plusSlidesnew('mySlides-Nomenclature',-1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10094;</button>
+                      <button id="nextBtn-Nomenclature" class="next"  onclick="plusSlidesnew('mySlides-Nomenclature',1, 'prevBtn-Nomenclature','nextBtn-Nomenclature')">&#10095;</button>
+                  </div>    
+            </div>
         </div>
         
         <div id="Root-Stem-Bark" class="tabcontent">
@@ -533,6 +539,24 @@ span {
                 </div>
             </div> 
         </div>
+        <div class="row">
+          <div class="col-lg-9">
+              <footer>
+                  <p>Contact - Mandar Joshi, 0091-9637527026, mandarsj11@gmail.com<br>
+                     Copy Right - All images & text description on this site are copyrighted and may not be used without permission.</p>
+              </footer>    
+          </div>
+          <div class="col-lg-1">
+              <a href="https://github.com/mandarsj11" target="_blank" rel="noopener noreferrer">
+                  <img src="/static/openmic/img/github.JPG" style="width:60%;object-fit: contain;">
+              </a>
+          </div>
+          <div class="col-lg-1">     
+              <a href="https://www.linkedin.com/in/mandar-joshi-a21b587/" target="_blank" rel="noopener noreferrer">
+                  <img src="/static/openmic/img/linkedin.JPG" style="width:60%;object-fit: contain;">
+              </a>
+          </div>
+      </div>    
     <!-- </div>  /.compare-box -->
 </div>
 
