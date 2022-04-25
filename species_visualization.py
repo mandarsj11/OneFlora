@@ -132,10 +132,10 @@ def fetchdata():
             if not rs['Sketch Name'].isnull().values.any():
                 photo = rs['Sketch Name'].iat[0]
             else:
-                photo = 'Default_sketch'
+                photo = 'Default_sketch.jpg'
         else:
             meaning = 'Add term to the Directory'
-            photo = 'Default_sketch'
+            photo = 'Default_sketch.jpg'
         #print(meaning)
         return jsonify({'htmlresponse': render_template('response.html', meaning=meaning, photo=photo)})
     else:
@@ -168,6 +168,7 @@ Steps to run flask from Terminal
 #Hosting Python-Flask website on Azure
 # https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e
 # https://docs.microsoft.com/en-in/azure/app-service/quickstart-python?tabs=bash&pivots=python-framework-flask
+# https://medium.com/geekculture/create-basic-web-application-%EF%B8%8F-and-deployment-using-python-eb027e57c5ee
 
 #Autocomplete code	
 #https://api.jqueryui.com/autocomplete/

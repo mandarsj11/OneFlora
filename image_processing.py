@@ -19,8 +19,8 @@ def get_font(picture, caption):
     return font
 
 # finds current working dir
-setwd = os.chdir('E:\Coursera Material\Python For Everyone\Botany\static\\flora_title\TBD\Image_processing')
-outpath = 'E:\Coursera Material\Python For Everyone\Botany\static\\flora_title\TBD\Processed_images'
+setwd = os.chdir('E:\Coursera Material\Python For Everyone\OneFlora\static\\flora_title\TBD\Image_processing')
+outpath = 'E:\Coursera Material\Python For Everyone\OneFlora\static\\flora_title\TBD\Processed_images'
 formats = ('.jpg', '.jpeg')
 Image_Library = pd.DataFrame(columns = ['File_Name', 'Family', 'Botanical_name','Record_count', 'Attribute', 
                                         'Photo_DateTime','Contributor','Caption'])
@@ -59,7 +59,7 @@ for file in os.listdir(setwd):
                 elif image_orientation in (8,'8'):
                      picture=picture.transpose(Image.ROTATE_90)        
                 try:
-                datetime = pd.to_datetime(exif[36867], format='%Y:%m:%d %H:%M:%S')
+                    datetime = pd.to_datetime(exif[36867], format='%Y:%m:%d %H:%M:%S')
                     print("The date and time when the original image data was generated: ",file)
                 except KeyError:
                     datetime = pd.to_datetime(exif[306], format='%Y:%m:%d %H:%M:%S')
@@ -106,7 +106,7 @@ print('DataFrame is written successfully to Excel File.')
 """
 from os import listdir
 from os.path import isfile, join
-mypath = 'E:\Coursera Material\Python For Everyone\Botany\static\\flora_title\TBD\Processed_images'
+mypath = 'E:\Coursera Material\Python For Everyone\OneFlora\static\\flora_title\TBD\Processed_images'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 onlyfilesdf = pd.DataFrame(onlyfiles, columns =['File_name'], dtype = str)
 
