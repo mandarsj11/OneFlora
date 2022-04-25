@@ -151,7 +151,7 @@ if __name__ == "__main__": #if this script is run directly then start the applic
 
 """
 Steps to run flask from Terminal
-> $env:FLASK_APP = "name_of_.py_to_run"
+> $env:FLASK_APP = "species_visualization.py"
 > flask run
 """
 

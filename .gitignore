@@ -1,6 +1,2 @@
-*.JPG
-*.png
-*.JPEG
-*.ico
-*.xlsx
 .venv/
+*.pyc
