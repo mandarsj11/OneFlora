@@ -3,3 +3,4 @@
 *.JPEG
 *.ico
 *.xlsx
+.venv/
